@@ -50,8 +50,8 @@
 				var initialX = event.clientX;
 
 				// Get grid position
-				var x = Math.floor(event.clientX / ($scope.options.grid[0] + $scope.options.offset[0]));
-				var y = Math.floor(event.clientY / ($scope.options.grid[1] + $scope.options.offset[1]));
+				var x = Math.floor((event.clientX - $scope.options.offset[0]) / $scope.options.grid[0]);
+				var y = Math.floor((event.clientY - $scope.options.offset[1]) / $scope.options.grid[1]);
 
 				var appointmentLength = 1;
 				var appointmentAdded = false;
