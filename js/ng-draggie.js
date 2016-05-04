@@ -17,9 +17,10 @@
 			// Set element position
 			function setPosition(scope, element) {
 				$(element).css('position', 'absolute');
-				$(element).css('left', scope.pos[0] * (scope.options.grid[0] + scope.options.offset[0]) + scope.options.padding[0] + 'px');
-				$(element).css('top', scope.pos[1] * (scope.options.grid[1] + scope.options.offset[1]) + scope.options.padding[1] + 'px');
-				$(element).css('width', (scope.length-1) * scope.options.grid[0] + parseInt($(element).css('width').replace(/[^-\d\.]/g, '')) + 'px');
+				$(element).css('left', scope.pos[0] * scope.options.grid[0] + scope.options.offset[0] + scope.options.padding[0] + 'px');
+				$(element).css('top', scope.pos[1] * scope.options.grid[1] + scope.options.offset[1] + scope.options.padding[1] + 'px');
+				$(element).css('width', scope.length * scope.options.grid[0] - scope.options.padding[0] * 2 + 'px');
+				$(element).css('height', scope.options.grid[1] - scope.options.padding[1] * 2 + 'px');
 			}
 
 			// Set drag-and-drop events

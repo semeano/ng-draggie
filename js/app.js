@@ -20,8 +20,8 @@
 			// Draggie options
 			$scope.options = {
 				grid: [150, 48],
-				offset: [0, 2],
-				padding: [5, 8]
+				offset: [0, 0],
+				padding: [5, 4]
 			};
 
 			// Drag-and-drop events
@@ -49,33 +49,34 @@
 				// Get cursor position
 				var initialX = event.clientX;
 
-				var appointment;
+				// Get grid position
+				var x = Math.floor(event.clientX / ($scope.options.grid[0] + $scope.options.offset[0]));
+				var y = Math.floor(event.clientY / ($scope.options.grid[1] + $scope.options.offset[1]));
+
+				var appointmentLength = 1;
 				var appointmentAdded = false;
 
 				// Resize move
 				$(window).on('mousemove', function (event) {
-					if (angular.isUndefined(appointment)) {
-						// Get cursor position
-						var x = Math.floor(event.clientX / ($scope.options.grid[0] + $scope.options.offset[0]));
-						var y = Math.floor(event.clientY / ($scope.options.grid[1] + $scope.options.offset[1]));
-						// Create appointment
-						appointment = { id: $scope.appointments.length.toString(), name: '- empty -', pos: [x, y], length: 1, edit: false };
-						$scope.appointments.push(appointment);
-						$scope.$apply();
+					if (!appointmentAdded) {
+						addNewAppointment(x, y, appointmentLength);
 						appointmentAdded = true;
 					}
 
 					var cursorOffset = event.clientX - initialX;
+					console.log(cursorOffset);
 
-					if (cursorOffset > $scope.options.grid[0] / 2) {
-						appointment.length++;
+					if (cursorOffset > $scope.options.grid[0]) {
 						initialX += $scope.options.grid[0];
-						$scope.$apply();
+						appointmentLength++;
+						$scope.appointments.pop();
+						addNewAppointment(x, y, appointmentLength);
 					}
-					else if (cursorOffset < -($scope.options.grid[0] / 2) && appointment.length > 1) {
-						appointment.length--;
+					else if (cursorOffset < -($scope.options.grid[0]) && appointmentLength > 1) {
 						initialX -= $scope.options.grid[0];
-						$scope.$apply();
+						appointmentLength--;
+						$scope.appointments.pop();
+						addNewAppointment(x, y, appointmentLength);
 					}
 
 					event.stopPropagation();
@@ -87,8 +88,16 @@
 					$(this).off('mousedown');
 					$(window).off('mousemove');
 					$(window).off('mouseup');
+					checkOverlap();
 					event.stopPropagation();
 				});
+			}
+
+			// Add new appointment
+			function addNewAppointment(x, y, length) {
+				var newAppointment = { id: $scope.appointments.length.toString(), name: '- empty -', pos: [x, y], length: length };
+				$scope.appointments.push(newAppointment);
+				$scope.$apply();
 			}
 
 			// Edit appointment
@@ -110,7 +119,7 @@
 				$.each($('.draggie'), function (index, draggie) {
 					var x = (parseInt($(draggie).css('left').replace(/[^-\d\.]/g, '')) - $scope.options.padding[0]) / ($scope.options.grid[0] + $scope.options.offset[0]);
 					var y = (parseInt($(draggie).css('top').replace(/[^-\d\.]/g, '')) - $scope.options.padding[1]) / ($scope.options.grid[1] + $scope.options.offset[1]);
-					var l = (parseInt($(draggie).css('width').replace(/[^-\d\.]/g, '')) - 109) / $scope.options.grid[0] + 1;
+					var l = (parseInt($(draggie).css('width').replace(/[^-\d\.]/g, '')) + $scope.options.padding[0] * 2) / $scope.options.grid[0];
 
 					// Check overlap
 					var overlaps = false;
