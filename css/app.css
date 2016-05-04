@@ -1,0 +1,82 @@
+body {
+	font-family: sans-serif;
+	font-size: 1em;
+	margin: 0;
+}
+
+.wrapper {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: linear-gradient(90deg, transparent 99%, #ccc);
+	background-size: 150px;
+	padding: 0;
+	margin: 0;
+	z-index: -2;
+}
+
+.draggie {
+	border: 0;
+	border-radius: 4px;
+	padding: 9px 15px;
+	width: 109px;
+	min-width: 109px;
+	height: 20px;
+	max-height: 20px;
+	cursor: move;
+	color: #555;
+	z-index: -1;
+}
+
+.draggie:nth-child(5n+0) {
+	background-color: #77DD77;
+}
+
+.draggie:nth-child(5n+1) {
+	background-color: #FFB347;
+}
+
+.draggie:nth-child(5n+2) {
+	background-color: #FF6961;
+}
+
+.draggie:nth-child(5n+3) {
+	background-color: #B19CD9;
+}
+
+.draggie:nth-child(5n+4) {
+	background-color: #AEC6CF;
+}
+
+.draggie > div {
+	line-height: 1.3em;
+	margin: 0;
+	cursor: pointer;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.draggie > div > input {
+	border: 0;
+	outline: none;
+	font-family: sans-serif;
+	font-size: 1em;
+	background-color: transparent;
+	color: black;
+}
+
+.draggie > span {
+	position: absolute;
+	right: 0;
+	top: 1px;
+	font-size: 2em;
+	color: #888;
+	display: none;
+}
+
+.draggie:hover > span {
+	display: block;
+	cursor: ew-resize;
+}

@@ -1,0 +1,14 @@
+{
+	"curly": true,
+	"eqeqeq": true,
+	"esversion": 6,
+	"latedef": false,
+	"nonbsp": true,
+	"strict": true,
+	"undef": true,
+	"unused": true,
+	"node": true,
+	"globals": {
+		"$": false
+	}
+}
