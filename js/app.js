@@ -20,7 +20,7 @@
 			// Draggie options
 			$scope.options = {
 				grid: [150, 48],
-				offset: [0, 0],
+				offset: [100, 50],
 				padding: [5, 4]
 			};
 

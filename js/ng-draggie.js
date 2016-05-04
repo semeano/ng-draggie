@@ -45,23 +45,23 @@
 						// X axis
 						var cursorXOffset = event.clientX - initialX;
 						if (cursorXOffset > scope.options.grid[0]) {
-							move.left += scope.options.grid[0] + scope.options.offset[0];
-							initialX += scope.options.grid[0] + scope.options.offset[0];
+							move.left += scope.options.grid[0];
+							initialX += scope.options.grid[0];
 						}
 						else if (cursorXOffset < -(scope.options.grid[0])) {
-							move.left -= scope.options.grid[0] + scope.options.offset[0];
-							initialX -= scope.options.grid[0] + scope.options.offset[0];
+							move.left -= scope.options.grid[0];
+							initialX -= scope.options.grid[0];
 						}
 
 						// Y axis
 						var cursorYOffset = event.clientY - initialY;
 						if (cursorYOffset > scope.options.grid[1]) {
-							move.top += scope.options.grid[1] + scope.options.offset[1];
-							initialY += scope.options.grid[1] + scope.options.offset[1];
+							move.top += scope.options.grid[1];
+							initialY += scope.options.grid[1];
 						}
 						else if (cursorYOffset < -(scope.options.grid[1])) {
-							move.top -= scope.options.grid[1] + scope.options.offset[1];
-							initialY -= scope.options.grid[1] + scope.options.offset[1];
+							move.top -= scope.options.grid[1];
+							initialY -= scope.options.grid[1];
 						}
 
 						// Set transform
@@ -86,7 +86,7 @@
 						if ($(element).css('transform') !== 'none') {
 							var currentLeft = parseInt($(element).css('left').replace(/[^-\d\.]/g, ''));
 							var translateLeft = parseInt($(element).css('transform').substring(7).replace(')', '').split(',')[4].replace(/[^-\d\.]/g, ''));
-							$(element).css('left', currentLeft + translateLeft + scope.options.offset[0] + 'px');
+							$(element).css('left', currentLeft + translateLeft + 'px');
 							var currentTop = parseInt($(element).css('top').replace(/[^-\d\.]/g, ''));
 							var translateTop = parseInt($(element).css('transform').substring(7).replace(')', '').split(',')[5].replace(/[^-\d\.]/g, ''));
 							$(element).css('top', currentTop + translateTop + 'px');
