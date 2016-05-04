@@ -117,8 +117,8 @@
 			function checkOverlap() {
 				var matrix = [];
 				$.each($('.draggie'), function (index, draggie) {
-					var x = (parseInt($(draggie).css('left').replace(/[^-\d\.]/g, '')) - $scope.options.padding[0]) / ($scope.options.grid[0] + $scope.options.offset[0]);
-					var y = (parseInt($(draggie).css('top').replace(/[^-\d\.]/g, '')) - $scope.options.padding[1]) / ($scope.options.grid[1] + $scope.options.offset[1]);
+					var x = (parseInt($(draggie).css('left').replace(/[^-\d\.]/g, '')) - $scope.options.padding[0] - $scope.options.offset[0]) / ($scope.options.grid[0]);
+					var y = (parseInt($(draggie).css('top').replace(/[^-\d\.]/g, '')) - $scope.options.padding[1] - $scope.options.offset[1]) / ($scope.options.grid[1]);
 					var l = (parseInt($(draggie).css('width').replace(/[^-\d\.]/g, '')) + $scope.options.padding[0] * 2) / $scope.options.grid[0];
 
 					// Check overlap
@@ -137,7 +137,7 @@
 
 					if (overlaps) {
 						var element = $(draggie);
-						element.css('top', y * ($scope.options.grid[1] + $scope.options.offset[1]) + $scope.options.padding[1] + 'px');
+						element.css('top', y * $scope.options.grid[1] + $scope.options.padding[1] + $scope.options.offset[1] + 'px');
 					}
 
 					// Set ocupied positions
